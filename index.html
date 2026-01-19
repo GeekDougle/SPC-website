@@ -1,0 +1,44 @@
+---
+layout: archive
+title: "Technical Insights & Project Logs"
+permalink: /
+author_profile: true
+entries_layout: list
+pagination:
+enabled: true
+collection: posts
+permalink: /page/:num/
+---
+
+<p>Consulting expertise in <b>Electrical Engineering</b>, <b>Firmware Architecture</b>, and <b>Technical Management</b>.
+    Below are our latest updates and project deep-dives.</p>
+
+<hr>
+
+{% for post in paginator.posts %}
+{% include archive-single.html %}
+{% endfor %}
+
+{% if paginator.total_pages > 1 %}
+<nav class="pagination">
+    <ul>
+        {% if paginator.previous_page %}
+        <li><a href="{{ paginator.previous_page_path | relative_url }}">Previous</a></li>
+        {% endif %}
+
+        {% for page in (1..paginator.total_pages) %}
+        {% if page == paginator.page %}
+        <li><a href="#" class="disabled current">{{ page }}</a></li>
+        {% elsif page == 1 %}
+        <li><a href="{{ '/' | relative_url }}">{{ page }}</a></li>
+        {% else %}
+        <li><a href="{{ site.paginate_path | replace: ':num', page | relative_url }}">{{ page }}</a></li>
+        {% endif %}
+        {% endfor %}
+
+        {% if paginator.next_page %}
+        <li><a href="{{ paginator.next_page_path | relative_url }}">Next</a></li>
+        {% endif %}
+    </ul>
+</nav>
+{% endif %}
